@@ -11,23 +11,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.postit.notes.model.PostItNoteEntity;
 import com.postit.notes.service.PostItNoteService;
 
 @RestController
-@RequestMapping("/postit")
 public class PostItNoteController {
 
 	@Autowired
 	private PostItNoteService postItNoteService;
-
-	@GetMapping("/geddada")
-	public String HeyMaddy() {
-		return "Hello Geddada";
-	}
 
 	@GetMapping("/all")
 	public ResponseEntity<List<PostItNoteEntity>> getAllPostItNotes() {
@@ -43,6 +36,9 @@ public class PostItNoteController {
 
 	@PostMapping("/add")
 	public ResponseEntity<PostItNoteEntity> addPostItNote(@RequestBody PostItNoteEntity postItNoteEntity) {
+
+		System.out.println(postItNoteEntity);
+
 		PostItNoteEntity newPostItNote = postItNoteService.addPostItNote(postItNoteEntity);
 		return new ResponseEntity<>(newPostItNote, HttpStatus.CREATED);
 
